@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebContent/html/alert/alert_delete_notebook.html=UTF-8
+encoding//WebContent/html/alert/alert_delete_rollback.html=UTF-8
+encoding//WebContent/html/alert/alert_error.html=UTF-8
+encoding//WebContent/html/alert/alert_like.html=UTF-8
+encoding//WebContent/html/alert/alert_move.html=UTF-8
+encoding//WebContent/html/alert/alert_note.html=UTF-8
+encoding//WebContent/html/alert/alert_notebook.html=UTF-8
+encoding//WebContent/html/alert/alert_rename.html=UTF-8
+encoding//WebContent/html/alert/alert_replay.html=UTF-8
+encoding//WebContent/html/login.html=UTF-8
+encoding//WebContent/html/scripts/user/login.js=UTF-8

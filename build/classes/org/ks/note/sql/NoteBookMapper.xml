@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 命名空间 -->
+<mapper namespace="org.ks.note.dao.NoteBookDao">
+	<!-- 根据用户ID查询用户的笔记本 -->
+	<select id="findByUserId" parameterType="string" resultType="org.ks.note.entity.NoteBook">
+		select cn_notebook_id,
+			cn_user_id,
+			cn_notebook_type_id,
+			cn_notebook_name,
+			cn_notebook_desc,
+			cn_notebook_create_time
+		from cn_notebook where cn_user_id=#{cn_user_id}
+	</select>
+	<!-- 添加笔记本 -->
+	<insert id="save" parameterType="org.ks.note.entity.NoteBook">
+		insert into cn_notebook(
+			cn_notebook_id,
+			cn_user_id,
+			cn_notebook_type_id,
+			cn_notebook_name,
+			cn_notebook_desc,
+			cn_notebook_create_time)
+		values(
+			#{cn_notebook_id},
+			#{cn_user_id},
+			#{cn_notebook_type_id},
+			#{cn_notebook_name},
+			#{cn_notebook_desc},
+			#{cn_notebook_create_time})
+	</insert>
+	<!-- 笔记本的重命名 -->
+	<update id="updateNoteBookName" parameterType="map">
+		update cn_notebook set cn_notebook_name=#{cn_notebook_name} 
+		where cn_notebook_id=#{cn_notebook_id}
+	</update>
+	<!-- 删除笔记本 -->
+	<delete id="delete" parameterType="string">
+		delete from cn_notebook where cn_notebook_id=#{cn_notebook_id}
+	</delete>
+</mapper>

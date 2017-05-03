@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 命名空间 -->
+<mapper namespace="org.ks.note.dao.ShareDao">
+	<!-- 根据noteid查询笔记是否分享过 -->
+	<select id="findByNoteid" parameterType="string" resultType="org.ks.note.entity.Share">
+		select cn_share_id,cn_share_title,cn_share_body,cn_note_id from cn_share
+		where cn_note_id=#{cn_note_id}
+	</select>
+	<!-- 插入一个分享笔记 -->
+	<insert id="insert" parameterType="org.ks.note.entity.Share">
+		insert into cn_share(cn_share_id,cn_share_title,cn_share_body,cn_note_id)
+		values(
+			#{cn_share_id},
+			#{cn_share_title},
+			#{cn_share_body},
+			#{cn_note_id}
+		)
+	</insert>
+	<!-- 再次分享时更新分享后的笔记 -->
+	<update id="update" parameterType="string">
+		update cn_share set cn_share_title=#{cn_share_title},cn_share_body=#{cn_share_body}
+		where cn_note_id=#{cn_note_id}
+	</update>
+	<!-- 根据笔记id获取笔记信息 -->
+	<select id="findNoteById" parameterType="string" resultType="org.ks.note.entity.Note">
+		select * from cn_note
+		where cn_note_id=#{cn_note_id}
+	</select>
+	<!-- 模糊查询笔记 -->
+	<select id="findByTitle" parameterType="string" resultType="org.ks.note.entity.Share">
+		select * from cn_share 
+		<where>
+			<if test="cn_share_title!=null">
+				cn_share_title like concat("%",#{cn_share_title},"%")
+			</if>
+		</where>
+	</select>
+	<!-- 分页查询 -->
+	<select id="findUsePage" parameterType="org.ks.note.util.PageUtil" resultType="org.ks.note.entity.Share">
+		select * from cn_share limit #{begin},#{pageSize}
+	</select>
+</mapper>

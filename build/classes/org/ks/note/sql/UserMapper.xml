@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 命名空间 -->
+<mapper namespace="org.ks.note.dao.UserDao">
+	<!-- 登录 -->
+	<select id="findByName" parameterType="string" resultType="org.ks.note.entity.User">
+		select cn_user_id,cn_user_name,cn_user_password,cn_user_desc from cn_user
+		where cn_user_name=#{cn_user_name}
+	</select>
+	<!-- 通过ID查找用户 -->
+	<select id="findById" parameterType="string" resultType="org.ks.note.entity.User">
+		select cn_user_id,cn_user_name,cn_user_password,cn_user_desc from cn_user
+		where cn_user_id=#{cn_user_id}
+	</select>
+	<!-- 注册 -->
+	<insert id="insert" parameterType="org.ks.note.entity.User">
+		insert into cn_user(cn_user_id,cn_user_name,cn_user_password,cn_user_token,cn_user_desc)
+		values(
+			#{cn_user_id},
+			#{cn_user_name},
+			#{cn_user_password},
+			#{cn_user_token,jdbcType=VARCHAR},
+			#{cn_user_desc,jdbcType=VARCHAR}
+		)
+	</insert>
+	<!-- 修改密码 -->
+	<update id="changePassword" parameterType="map">
+		update cn_user set cn_user_password=#{cn_user_password}
+		where cn_user_id=#{cn_user_id}
+	</update>
+</mapper>
